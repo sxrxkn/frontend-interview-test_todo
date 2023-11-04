@@ -3,12 +3,15 @@ import { useDispatch } from "react-redux";
 import { useLocation } from "react-router-dom";
 
 /* APPLICATION */
-import { Modal } from "./Modal";
-import { ModalHeader } from "./ModalHeader";
-import { ModalText } from "./ModalText";
-import { ModalFooter } from "./ModalFooter";
-import { tasksRemoved, tasksClearedCategories } from "../features/tasksSlice";
-import { categoriesRemoved } from "../features/categoriesSlice";
+import { Modal } from "./GeneralModalComponents/Modal";
+import { ModalHeader } from "./GeneralModalComponents/ModalHeader";
+import { ModalText } from "./GeneralModalComponents/ModalText";
+import { ModalFooter } from "./GeneralModalComponents/ModalFooter";
+import {
+  tasksRemoved,
+  tasksClearedCategories,
+} from "../../store/features/tasksSlice";
+import { categoriesRemoved } from "../../store/features/categoriesSlice";
 
 interface ModalRemoveItemProps {
   item: {
@@ -31,6 +34,16 @@ export const ModalRemoveItem: React.FC<ModalRemoveItemProps> = ({
     isCategories = pathname.includes("categories"),
     text = `Вы уверены, что хотите удалить задачу "${item.name}"?`;
 
+  const handleDeleteCardSubmit = () => {
+    console.log("Delete");
+    if (isCategories) {
+      dispatch(categoriesRemoved(item.id));
+      dispatch(tasksClearedCategories(item.id));
+    } else {
+      dispatch(tasksRemoved(item.id));
+    }
+  };
+
   return (
     <Modal item={item} active={active} setActive={setActive}>
       <ModalHeader setActive={setActive} title={"Удаление задачи"} />
@@ -38,14 +51,7 @@ export const ModalRemoveItem: React.FC<ModalRemoveItemProps> = ({
       <ModalFooter
         setActive={setActive}
         submitBtnText="Да"
-        onSubmit={
-          isCategories
-            ? () => {
-                dispatch(categoriesRemoved(item.id));
-                dispatch(tasksClearedCategories(item.id));
-              }
-            : () => dispatch(tasksRemoved(item.id))
-        }
+        onSubmit={handleDeleteCardSubmit}
       />
     </Modal>
   );

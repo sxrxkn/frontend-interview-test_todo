@@ -4,14 +4,14 @@ import { useDispatch } from "react-redux";
 import { useLocation } from "react-router-dom";
 
 /* APPLICATION */
-import { Modal } from "./Modal";
-import { ModalHeader } from "./ModalHeader";
-import { ModalRow } from "./ModalRow";
-import { ModalInput } from "./ModalInput";
-import { ModalTextarea } from "./ModalTextarea";
-import { ModalFooter } from "./ModalFooter";
-import { tasksUpdated } from "../features/tasksSlice";
-import { categoriesUpdated } from "../features/categoriesSlice";
+import { Modal } from "./GeneralModalComponents/Modal";
+import { ModalHeader } from "./GeneralModalComponents/ModalHeader";
+import { ModalRow } from "./GeneralModalComponents/ModalRow";
+import { ModalInput } from "./GeneralModalComponents/ModalInput";
+import { ModalTextarea } from "./GeneralModalComponents/ModalTextarea";
+import { ModalFooter } from "./GeneralModalComponents/ModalFooter";
+import { tasksUpdated } from "../../store/features/tasksSlice";
+import { categoriesUpdated } from "../../store/features/categoriesSlice";
 
 interface ModalEditItemProps {
   item: {
@@ -33,8 +33,22 @@ export const ModalEditItem: React.FC<ModalEditItemProps> = ({
     { pathname } = useLocation(),
     isCategories = pathname.includes("categories"),
     [name, setName] = useState(item.name),
-    [selected, setSelected] = useState(item.category || ""),
+    [category, setCategory] = useState(item.category || ""),
     [description, setDescription] = useState(item.description);
+
+  const handleEditCardSubmit = () => {
+    isCategories
+      ? dispatch(categoriesUpdated({ id: item.id, name, description }))
+      : dispatch(
+          tasksUpdated({
+            id: item.id,
+            name,
+            description,
+            category,
+          })
+        );
+    setActive(false);
+  };
 
   return (
     <Modal item={item} active={active} setActive={setActive}>
@@ -50,8 +64,8 @@ export const ModalEditItem: React.FC<ModalEditItemProps> = ({
         <ModalRow
           name={name}
           setName={setName}
-          selected={selected}
-          setSelected={setSelected}
+          category={category}
+          setCategory={setCategory}
         />
       )}
       <ModalTextarea
@@ -62,19 +76,7 @@ export const ModalEditItem: React.FC<ModalEditItemProps> = ({
         setActive={setActive}
         submitBtnText="Сохранить"
         size="large"
-        onSubmit={() => {
-          dispatch(
-            isCategories
-              ? categoriesUpdated({ id: item.id, name, description })
-              : tasksUpdated({
-                  id: item.id,
-                  name,
-                  description,
-                  category: selected,
-                })
-          );
-          setActive(false);
-        }}
+        onSubmit={handleEditCardSubmit}
       />
     </Modal>
   );

@@ -3,9 +3,10 @@ import { useState } from "react";
 import { useSelector } from "react-redux";
 
 /* APPLICATION */
-import edit from "../icons/edit.svg";
-import remove from "../icons/remove.svg";
-import { selectAllCategories } from "../features/categoriesSlice";
+import "./ListItem.css";
+import edit from "../../assets/icons/edit.svg";
+import remove from "../../assets/icons/remove.svg";
+import { selectAllCategories } from "../../store/features/categoriesSlice";
 import { ModalEditItem } from "../Modal/ModalEditItem";
 import { ModalRemoveItem } from "../Modal/ModalRemoveItem";
 
@@ -20,8 +21,8 @@ interface ListItemProps {
 
 export const ListItem: React.FC<ListItemProps> = ({ item }) => {
   const categories = useSelector(selectAllCategories),
-    [editModalActive, setEditModalActive] = useState(false)
-  let [removeModalActive, setRemoveModalActive] = useState(false);
+    [editModalActive, setEditModalActive] = useState(false);
+  const [removeModalActive, setRemoveModalActive] = useState(false);
 
   return (
     <>
@@ -45,16 +46,14 @@ export const ListItem: React.FC<ListItemProps> = ({ item }) => {
             className="list-item-col2__btn"
             onClick={() => {
               setEditModalActive(true);
-            }}
-          >
+            }}>
             <img src={edit} alt="edit" />
           </button>
           <button
             className="list-item-col2__btn"
             onClick={() => {
-              removeModalActive = true;
-            }}
-          >
+              setRemoveModalActive(true);
+            }}>
             <img src={remove} alt="remove" />
           </button>
         </div>

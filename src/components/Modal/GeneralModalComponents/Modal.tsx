@@ -29,8 +29,7 @@ export const Modal: React.FC<ModalProps> = ({
       onClick={() => {
         clearState && clearState();
         setActive(false);
-      }}
-    >
+      }}>
       <div className="modal__content" onClick={(e) => e.stopPropagation()}>
         {children}
       </div>

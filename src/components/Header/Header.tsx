@@ -21,8 +21,7 @@ export const Header = () => {
               !isCategories
                 ? "header-list-item header-list-item-active"
                 : "header-list-item"
-            }
-          >
+            }>
             <Link to="tasks">Задачи</Link>
           </li>
           <li
@@ -30,8 +29,7 @@ export const Header = () => {
               isCategories
                 ? "header-list-item header-list-item-active"
                 : "header-list-item"
-            }
-          >
+            }>
             <Link to="categories">Категории</Link>
           </li>
         </ul>
@@ -39,8 +37,7 @@ export const Header = () => {
           className="header-button"
           onClick={() => {
             setCreateModalActive(true);
-          }}
-        >
+          }}>
           {isCategories ? "Добавить категорию" : "Добавить задачу"}
         </button>
       </nav>

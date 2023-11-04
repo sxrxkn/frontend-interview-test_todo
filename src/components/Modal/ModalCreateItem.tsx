@@ -2,16 +2,17 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useLocation } from "react-router-dom";
+import { v4 as uuidv4 } from "uuid";
 
 /* APPLICATION */
-import { Modal } from "./Modal";
-import { ModalHeader } from "./ModalHeader";
-import { ModalInput } from "./ModalInput";
-import { ModalRow } from "./ModalRow";
-import { ModalTextarea } from "./ModalTextarea";
-import { ModalFooter } from "./ModalFooter";
-import { tasksAdded } from "../features/tasksSlice";
-import { categoriesAdded } from "../features/categoriesSlice";
+import { Modal } from "./GeneralModalComponents/Modal";
+import { ModalHeader } from "./GeneralModalComponents/ModalHeader";
+import { ModalInput } from "./GeneralModalComponents/ModalInput";
+import { ModalRow } from "./GeneralModalComponents/ModalRow";
+import { ModalTextarea } from "./GeneralModalComponents/ModalTextarea";
+import { ModalFooter } from "./GeneralModalComponents/ModalFooter";
+import { tasksAdded } from "../../store/features/tasksSlice";
+import { categoriesAdded } from "../../store/features/categoriesSlice";
 
 interface ModalCreateItemProps {
   active: boolean;
@@ -26,14 +27,31 @@ export const ModalCreateItem: React.FC<ModalCreateItemProps> = ({
     { pathname } = useLocation(),
     isCategories = pathname.includes("categories"),
     [name, setName] = useState(""),
-    [selected, setSelected] = useState(""),
+    [category, setCategory] = useState(""),
     [description, setDescription] = useState("");
 
-  function clearState() {
+  const clearState = () => {
     setName("");
     setDescription("");
-    setSelected("");
-  }
+    setCategory("");
+  };
+
+  const handleCreateCardSubmit = () => {
+    if (name) {
+      isCategories
+        ? dispatch(categoriesAdded({ id: uuidv4(), name, description }))
+        : dispatch(
+            tasksAdded({
+              id: uuidv4(),
+              name,
+              description,
+              category: category,
+            })
+          );
+    }
+    clearState();
+    setActive(false);
+  };
 
   return (
     <Modal active={active} setActive={setActive} clearState={clearState}>
@@ -48,8 +66,8 @@ export const ModalCreateItem: React.FC<ModalCreateItemProps> = ({
         <ModalRow
           name={name}
           setName={setName}
-          selected={selected}
-          setSelected={setSelected}
+          category={category}
+          setCategory={setCategory}
         />
       )}
       <ModalTextarea
@@ -61,23 +79,7 @@ export const ModalCreateItem: React.FC<ModalCreateItemProps> = ({
         clearState={clearState}
         submitBtnText="Создать"
         size="large"
-        onSubmit={
-          name
-            ? () => {
-                dispatch(
-                  isCategories
-                    ? categoriesAdded({ name, description })
-                    : tasksAdded({
-                        name,
-                        description,
-                        category: setSelected,
-                      })
-                );
-                clearState();
-                setActive(false);
-              }
-            : () => {}
-        }
+        onSubmit={handleCreateCardSubmit}
       />
     </Modal>
   );

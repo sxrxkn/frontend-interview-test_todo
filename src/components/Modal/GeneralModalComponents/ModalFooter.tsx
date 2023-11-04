@@ -24,8 +24,7 @@ export const ModalFooter: React.FC<ModalFooterProps> = ({
         onClick={() => {
           clearState && clearState();
           setActive(false);
-        }}
-      >
+        }}>
         Закрыть
       </ModalBtn>
     </footer>

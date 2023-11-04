@@ -1,4 +1,4 @@
-import close from "../icons/close.svg";
+import close from "../../../assets/icons/close.svg";
 
 interface ModalHeaderProps {
   clearState?(): void;
@@ -19,8 +19,7 @@ export const ModalHeader: React.FC<ModalHeaderProps> = ({
         onClick={() => {
           clearState && clearState();
           setActive(false);
-        }}
-      >
+        }}>
         <img src={close} alt="close" />
       </button>
     </header>
