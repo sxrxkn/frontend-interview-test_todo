@@ -1,0 +1,11 @@
+.modal__content_row {
+    display: flex;
+    justify-content: space-between;
+}
+
+@media (max-width: 600px) {
+    .modal__content_row {
+      flex-direction: column;
+      padding-bottom: 50px;
+    }
+}

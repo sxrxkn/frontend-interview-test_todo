@@ -1,4 +1,5 @@
-import close from "../../../assets/icons/close.svg";
+import "./ModalHeader.css";
+import close from "../../../../assets/icons/close.svg";
 
 interface ModalHeaderProps {
   clearState?(): void;
@@ -6,7 +7,7 @@ interface ModalHeaderProps {
   title: string;
 }
 
-export const ModalHeader: React.FC<ModalHeaderProps> = ({
+const ModalHeader: React.FC<ModalHeaderProps> = ({
   clearState,
   title,
   setActive,
@@ -25,3 +26,5 @@ export const ModalHeader: React.FC<ModalHeaderProps> = ({
     </header>
   );
 };
+
+export default ModalHeader;

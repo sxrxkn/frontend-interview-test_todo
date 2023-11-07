@@ -33,9 +33,7 @@ export const categoriesSlice = createSlice({
   initialState,
   reducers: {
     categoriesAdded: (state, action: PayloadAction<CategoriesState>) => {
-      state.push({
-        ...action.payload,
-      });
+      state.push(action.payload);
     },
     categoriesUpdated: (state, action: PayloadAction<CategoriesState>) => {
       const { id, name, description } = action.payload;
@@ -47,8 +45,8 @@ export const categoriesSlice = createSlice({
       }
     },
     categoriesRemoved: (state, action: PayloadAction<string>) => {
-      const removeCategorykId = action.payload;
-      return state.filter((task) => task.id !== removeCategorykId);
+      const removeCategoryId = action.payload;
+      return state.filter((task) => task.id !== removeCategoryId);
     },
   },
 });

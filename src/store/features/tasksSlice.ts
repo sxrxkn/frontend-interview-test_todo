@@ -37,9 +37,7 @@ export const tasksSlice = createSlice({
   initialState,
   reducers: {
     tasksAdded: (state, action: PayloadAction<TasksState>) => {
-      state.push({
-        ...action.payload,
-      });
+      state.push(action.payload);
     },
     tasksUpdated: (state, action: PayloadAction<TasksState>) => {
       const { id, name, description, category } = action.payload;
@@ -61,7 +59,7 @@ export const tasksSlice = createSlice({
       return state.map((task) => {
         if (task.category === removeCategoryId)
           return { ...task, category: "" };
-        else return { ...task };
+        else return task;
       });
     },
   },

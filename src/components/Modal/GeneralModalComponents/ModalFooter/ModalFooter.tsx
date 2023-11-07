@@ -1,4 +1,5 @@
-import { ModalBtn } from "./ModalBtn";
+import "./ModalFooter.css";
+import ModalBtn from "../ModalBtn/ModalBtn";
 
 interface ModalFooterProps {
   clearState?(): void;
@@ -8,7 +9,7 @@ interface ModalFooterProps {
   onSubmit: () => void;
 }
 
-export const ModalFooter: React.FC<ModalFooterProps> = ({
+const ModalFooter: React.FC<ModalFooterProps> = ({
   clearState,
   setActive,
   submitBtnText,
@@ -30,3 +31,5 @@ export const ModalFooter: React.FC<ModalFooterProps> = ({
     </footer>
   );
 };
+
+export default ModalFooter;

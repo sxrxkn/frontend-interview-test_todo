@@ -5,12 +5,14 @@ import { useLocation } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 
 /* APPLICATION */
-import { Modal } from "./GeneralModalComponents/Modal";
-import { ModalHeader } from "./GeneralModalComponents/ModalHeader";
-import { ModalInput } from "./GeneralModalComponents/ModalInput";
-import { ModalRow } from "./GeneralModalComponents/ModalRow";
-import { ModalTextarea } from "./GeneralModalComponents/ModalTextarea";
-import { ModalFooter } from "./GeneralModalComponents/ModalFooter";
+import {
+  Modal,
+  ModalHeader,
+  ModalInput,
+  ModalRow,
+  ModalTextarea,
+  ModalFooter,
+} from "./GeneralModalComponents";
 import { tasksAdded } from "../../store/features/tasksSlice";
 import { categoriesAdded } from "../../store/features/categoriesSlice";
 
@@ -23,12 +25,12 @@ export const ModalCreateItem: React.FC<ModalCreateItemProps> = ({
   active,
   setActive,
 }) => {
-  const dispatch = useDispatch(),
-    { pathname } = useLocation(),
-    isCategories = pathname.includes("categories"),
-    [name, setName] = useState(""),
-    [category, setCategory] = useState(""),
-    [description, setDescription] = useState("");
+  const dispatch = useDispatch();
+  const { pathname } = useLocation();
+  const isCategories = pathname.includes("categories");
+  const [name, setName] = useState("");
+  const [category, setCategory] = useState("");
+  const [description, setDescription] = useState("");
 
   const clearState = () => {
     setName("");

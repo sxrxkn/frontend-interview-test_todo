@@ -1,4 +1,6 @@
-import important from "../../../assets/icons/important.svg";
+import "./ModalInput.css";
+import "../GeneralStyles.css";
+import important from "../../../../assets/icons/important.svg";
 
 interface ModalInputProps {
   name: string;
@@ -6,11 +8,7 @@ interface ModalInputProps {
   size?: string;
 }
 
-export const ModalInput: React.FC<ModalInputProps> = ({
-  name,
-  setName,
-  size,
-}) => {
+const ModalInput: React.FC<ModalInputProps> = ({ name, setName, size }) => {
   return (
     <div
       className={
@@ -28,3 +26,5 @@ export const ModalInput: React.FC<ModalInputProps> = ({
     </div>
   );
 };
+
+export default ModalInput;

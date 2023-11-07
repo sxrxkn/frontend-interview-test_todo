@@ -3,15 +3,17 @@ import { useState } from "react";
 import { useSelector } from "react-redux";
 
 /* APPLICATION */
-import down from "../../../assets/icons/down.svg";
-import { selectAllCategories } from "../../../store/features/categoriesSlice";
+import "./ModalDropdown.css";
+import "../GeneralStyles.css";
+import down from "../../../../assets/icons/down.svg";
+import { selectAllCategories } from "../../../../store/features/categoriesSlice";
 
 interface ModalDropdownProps {
   category: string | undefined;
   setCategory: React.Dispatch<React.SetStateAction<string>>;
 }
 
-export const ModalDropdown: React.FC<ModalDropdownProps> = ({
+const ModalDropdown: React.FC<ModalDropdownProps> = ({
   category,
   setCategory,
 }) => {
@@ -27,9 +29,9 @@ export const ModalDropdown: React.FC<ModalDropdownProps> = ({
         <img src={down} alt="open dropdown" />
       </div>
       {isActive && (
-        <div className="dropdown-content">
+        <ul className="dropdown-content">
           {options.map((option) => (
-            <div
+            <li
               className="dropdown-item"
               onClick={() => {
                 setCategory(option.id);
@@ -37,10 +39,12 @@ export const ModalDropdown: React.FC<ModalDropdownProps> = ({
               }}
               key={option.id}>
               {option.name}
-            </div>
+            </li>
           ))}
-        </div>
+        </ul>
       )}
     </div>
   );
 };
+
+export default ModalDropdown;

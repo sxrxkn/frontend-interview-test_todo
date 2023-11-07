@@ -1,0 +1,10 @@
+.modal__content-footer {
+    display: flex;
+    justify-content: flex-end;
+}
+
+@media (max-width: 600px) {
+    .modalinput-wrapper {
+        width: 100%;
+    }
+}

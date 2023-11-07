@@ -1,9 +1,12 @@
+import "./ModalTextarea.css";
+import "../GeneralStyles.css";
+
 interface ModalTextareaProps {
   description: string;
   setDescription: React.Dispatch<React.SetStateAction<string>>;
 }
 
-export const ModalTextarea: React.FC<ModalTextareaProps> = ({
+const ModalTextarea: React.FC<ModalTextareaProps> = ({
   description,
   setDescription,
 }) => {
@@ -20,3 +23,5 @@ export const ModalTextarea: React.FC<ModalTextareaProps> = ({
     </div>
   );
 };
+
+export default ModalTextarea;

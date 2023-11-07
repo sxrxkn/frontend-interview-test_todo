@@ -7,9 +7,9 @@ import "./Header.css";
 import { ModalCreateItem } from "../Modal/ModalCreateItem";
 
 export const Header = () => {
-  const { pathname } = useLocation(),
-    isCategories = pathname.includes("categories"),
-    [createModalActive, setCreateModalActive] = useState(false);
+  const { pathname } = useLocation();
+  const isCategories = pathname.includes("categories");
+  const [createModalActive, setCreateModalActive] = useState(false);
 
   return (
     <header className="header">

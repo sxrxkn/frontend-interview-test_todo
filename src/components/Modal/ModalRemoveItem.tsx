@@ -3,10 +3,12 @@ import { useDispatch } from "react-redux";
 import { useLocation } from "react-router-dom";
 
 /* APPLICATION */
-import { Modal } from "./GeneralModalComponents/Modal";
-import { ModalHeader } from "./GeneralModalComponents/ModalHeader";
-import { ModalText } from "./GeneralModalComponents/ModalText";
-import { ModalFooter } from "./GeneralModalComponents/ModalFooter";
+import {
+  Modal,
+  ModalHeader,
+  ModalText,
+  ModalFooter,
+} from "./GeneralModalComponents";
 import {
   tasksRemoved,
   tasksClearedCategories,
@@ -35,7 +37,6 @@ export const ModalRemoveItem: React.FC<ModalRemoveItemProps> = ({
     text = `Вы уверены, что хотите удалить задачу "${item.name}"?`;
 
   const handleDeleteCardSubmit = () => {
-    console.log("Delete");
     if (isCategories) {
       dispatch(categoriesRemoved(item.id));
       dispatch(tasksClearedCategories(item.id));
@@ -46,7 +47,7 @@ export const ModalRemoveItem: React.FC<ModalRemoveItemProps> = ({
 
   return (
     <Modal item={item} active={active} setActive={setActive}>
-      <ModalHeader setActive={setActive} title={"Удаление задачи"} />
+      <ModalHeader setActive={setActive} title="Удаление задачи" />
       <ModalText text={text} />
       <ModalFooter
         setActive={setActive}

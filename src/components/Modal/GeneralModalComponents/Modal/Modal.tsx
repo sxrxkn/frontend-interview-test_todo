@@ -17,7 +17,7 @@ interface ModalProps {
   clearState?(): void;
 }
 
-export const Modal: React.FC<ModalProps> = ({
+const Modal: React.FC<ModalProps> = ({
   clearState,
   active,
   setActive,
@@ -27,7 +27,7 @@ export const Modal: React.FC<ModalProps> = ({
     <div
       className={active ? "modal active" : "modal"}
       onClick={() => {
-        clearState && clearState();
+        clearState?.();
         setActive(false);
       }}>
       <div className="modal__content" onClick={(e) => e.stopPropagation()}>
@@ -36,3 +36,5 @@ export const Modal: React.FC<ModalProps> = ({
     </div>
   );
 };
+
+export default Modal;

@@ -24,3 +24,9 @@
 .modalbtn.primary.large {
   width: 200px;
 }
+
+@media (max-width: 500px) {
+  .modalbtn.primary.large {
+    width: 120px;
+  }
+}
